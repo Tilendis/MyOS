@@ -1,4 +1,4 @@
-; kernel.asm ------ 100%可靠版（时间日期完全正常）
+; kernel.asm 
 
 bits 16
 org 0x8000
@@ -205,7 +205,6 @@ cmd_date:
     mov si, msg_date
     call print_str
     
-    ; ========== 仅修改这6行：显示20开头的年份 ==========
     ; 显示世纪（20）
     mov al, [century]   ; 取世纪变量（0x20=20的BCD）
     call bcd_to_ascii
@@ -214,7 +213,6 @@ cmd_date:
     mov al, [year]      ; 取年份变量（00-99的BCD）
     call bcd_to_ascii
     call print_two
-    ; ========== 其余代码保持不变 ==========
     
     mov al, '-'
     int 0x10
@@ -234,7 +232,7 @@ cmd_date:
     jmp main_loop
 
 ; ----------------------------------------------------
-; **终极修复：只操作BL，确保BH=0**
+; **只操作BL，确保BH=0**
 read_num:
     push ax
     push cx
@@ -303,7 +301,7 @@ read_num:
     ret
 
 ; ----------------------------------------------------
-; 设置时间（修复：DL=0）
+; 设置时间（DL=0）
 cmd_set_time:
     mov si, msg_set_hour
     call print_str
@@ -350,7 +348,7 @@ cmd_set_time:
     or al, ah
     mov [second], al
     
-    ; **关键修复：DL必须清零**
+    ; **关键：DL必须清零**
     mov ah, 0x03
     mov ch, [hour]
     mov cl, [minute]
@@ -373,7 +371,7 @@ cmd_set_time:
     jmp cmd_set_time
 
 ; ----------------------------------------------------
-; 设置日期（修复：DL保留，世纪分离存储）
+; 设置日期（DL保留，世纪分离存储）
 cmd_set_date:
     mov si, msg_set_year
     call print_str
@@ -420,7 +418,7 @@ cmd_set_date:
     or al, ah
     mov [day], al
     
-    ; **关键修复：正确组合CX，DL保持0**
+    ; **关键：正确组合CX，DL保持0**
     mov ah, 0x05
     mov ch, [century]   ; CH = 0x20（世纪）
     mov cl, [year]      ; CL = 年份BCD
@@ -450,7 +448,7 @@ second  db 0
 year    db 0          ; **改为db，只存年份**
 month   db 0
 day     db 0
-century db 0x20       ; **新增：世纪BCD（默认为20）**
+century db 0x20       ; **世纪BCD（默认为20）**
 
 banner      db 13, 10, '========================================', 13, 10
             db '  MyOS - Minimal Operating System', 13, 10

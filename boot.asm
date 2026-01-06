@@ -1,4 +1,4 @@
-; boot.asm ------ 增强版引导加载程序（加载8个扇区）
+; boot.asm ------ 引导加载程序（加载8个扇区）
 
 bits 16
 org 0x7c00
@@ -18,7 +18,7 @@ start:
     ; 从软盘加载内核（LBA=1开始，加载8个扇区到0x8000）
     ; 可加载最多8*512=4KB内核
     mov ah, 0x02    ; BIOS读磁盘功能
-    mov al, 8       ; 读8个扇区（增大内核空间）
+    mov al, 8       ; 读8个扇区
     mov ch, 0       ; 柱面0
     mov cl, 2       ; 扇区2（LBA=1）
     mov dh, 0       ; 磁头0
@@ -49,7 +49,7 @@ print_string:
 .done:
     ret
 
-msg_loading db 'MyOS Boot Loader v1.0 - Loading kernel...', 13, 10, 0
+msg_loading db 'MyOS Boot Loader - Loading kernel...', 13, 10, 0
 msg_error db 'Disk Error! Press any key to reboot...', 0
 
 ; 填充 + 签名

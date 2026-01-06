@@ -453,8 +453,8 @@ century db 0x20       ; **世纪BCD（默认为20）**
 banner      db 13, 10, '========================================', 13, 10
             db '  MyOS - Minimal Operating System', 13, 10
             db '  Version 4.0', 13, 10
-            db '  Developer: 13', 13, 10
-            db '  University: YZU', 13, 10
+            db '  Developer: ***', 13, 10
+            db '  University: ***', 13, 10
             db '========================================', 13, 10, 10
             db ' Commands: t=time, d=date, s=set time', 13, 10
             db '           a=set date, c=clear, i=info', 13, 10

@@ -45,6 +45,10 @@ cat boot.bin kernel.bin > os.img
 ```bash
 bochs -f bochsrc.txt
 ```
+## 🎬 演示截图 | Demo Screenshot
+![MyOS运行界面1](https://github.com/Tilendis/MyOS/blob/main/docs/demo1.png)
+
+![MyOS运行界面2](https://github.com/Tilendis/MyOS/blob/main/docs/demo2.png)
 
 📋 支持命令 | Supported Commands
 
